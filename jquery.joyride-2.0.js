@@ -96,17 +96,7 @@
           settings.$document.on('click.joyride', '.joyride-next-tip, .joyride-modal-bg', function (e) {
             e.preventDefault();
 
-            if (settings.$li.next().length < 1) {
-              methods.end();
-            } else if (settings.timer > 0) {
-              clearTimeout(settings.automate);
-              methods.hide();
-              methods.show();
-              methods.startTimer();
-            } else {
-              methods.hide();
-              methods.show();
-            }
+            methods.next(); // @Thomas: FORKED
 
           });
 
@@ -124,6 +114,21 @@
           });
 
         });
+      },
+      
+      // @Thomas: FORKED
+      next : function() {
+        if (settings.$li.next().length < 1) {
+            methods.end();
+          } else if (settings.timer > 0) {
+            clearTimeout(settings.automate);
+            methods.hide();
+            methods.show();
+            methods.startTimer();
+          } else {
+            methods.hide();
+            methods.show();
+          }
       },
 
       // call this method when you want to resume the tour
