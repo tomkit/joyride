@@ -1,3 +1,9 @@
+## Forked:
+
+To support granular adding/removing of the Next button and the close button on a step-by-step basis.
+
+=====================
+
 Welcome to Joyride
 =====================
 
