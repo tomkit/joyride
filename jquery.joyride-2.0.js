@@ -15,6 +15,9 @@
 
   var defaults = {
       'version'              : '2.0',
+      'highlight'            : false,     // @Thomas: FORKED
+      'highlightColor'       : 'red',     // @Thomas: FORKED
+      'highlightDuration'    : 500,       // @Thomas: FORKED
       'tipLocation'          : 'bottom',  // 'top' or 'bottom' in relation to parent
       'nubPosition'          : 'auto',    // override on a per tooltip bases 
       'scrollSpeed'          : 300,       // Page scrolling speed in milliseconds
@@ -279,6 +282,19 @@
             }
 
             settings.$current_tip = settings.$next_tip;
+            
+            // @Thomas: FORK
+            if(settings.highlight) {
+                var originalColor = settings.$target.css('backgroundColor');
+                settings.$target.animate({
+                    backgroundColor : settings.highlightColor
+                }, settings.highlightDuration, function() {
+                    settings.$target.animate({
+                        backgroundColor : originalColor
+                    }, settings.highlightDuration);
+                });
+            }
+            
 
           } else {
 
