@@ -1,6 +1,17 @@
 ## Forked:
 
-To support granular adding/removing of the Next button and the close button on a step-by-step basis.
+To support granular adding/removing of the Next button and the close button on a step-by-step basis:
+<pre>
+data-button-enabled="false" to remove a button in a <li> step
+data-link-enabled="false" to remove the [x] button in a <li> step
+</pre>
+
+Also supporting highlighting of the container the tip is referencing via the global options:
+<pre>
+highlight : false // [true|false]
+highlightColor : 'red' // <some css color>
+highlightDuration : 500 // <any number in milliseconds>
+</pre>
 
 =====================
 
