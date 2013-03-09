@@ -2,8 +2,8 @@
 
 To support granular adding/removing of the Next button and the close button on a step-by-step basis:
 <pre>
-data-button-enabled="false" to remove a button in a \\<li\\> step
-data-link-enabled="false" to remove the [x] button in a \\<li\\> step
+data-button-enabled="false" to remove a button in a step
+data-link-enabled="false" to remove the [x] button in a step
 </pre>
 
 Also supporting highlighting of the container the tip is referencing via the global options:
