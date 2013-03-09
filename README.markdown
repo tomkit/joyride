@@ -9,8 +9,8 @@ data-link-enabled="false" to remove the [x] button in a step
 Also supporting highlighting of the container the tip is referencing via the global options:
 <pre>
 highlight : false // [true|false]
-highlightColor : 'red' // <some css color>
-highlightDuration : 500 // <any number in milliseconds>
+highlightColor : 'red' // some css color
+highlightDuration : 500 // any number in milliseconds
 </pre>
 
 =====================
