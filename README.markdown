@@ -13,6 +13,15 @@ highlightColor : 'red' // some css color
 highlightDuration : 500 // any number in milliseconds
 </pre>
 
+Supports going backwards in time. Added the following methods to joyride('some_method'):
+<pre>
+previous : goes to a previous li step // Untested.
+resumeBackwards : same as resuming after a pause, but goes to the previous li step instead. does the appropriate things such as executing the poststepcallback function. // Tested
+</pre>
+<br/>
+<br/>
+<br/>
+<br/>
 =====================
 
 Welcome to Joyride
