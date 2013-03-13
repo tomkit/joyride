@@ -133,11 +133,30 @@
             methods.show();
           }
       },
+      
+      previous : function() {
+          if (settings.timer > 0) {
+              clearTimeout(settings.automate);
+              methods.hide();
+              methods.show(undefined, true);
+              methods.startTimer();
+            } else {
+              methods.hide();
+              methods.show(undefined ,true);
+            }
+      },
 
       // call this method when you want to resume the tour
       resume : function () {
         methods.set_li();
         methods.show();
+      },
+      
+      /*@Thomas: FORKED*/
+      resumeBackwards : function() {
+        methods.set_li(undefined, true, true);
+        methods.show(undefined, true);
+        settings.postStepCallback(settings.$li.index()-1, settings.$current_tip, 'hide' /*@Thomas:FORKED*/); // @Thomas: FORKED. Force postStepCallback 
       },
 
       tip_template : function (opts) {
@@ -197,12 +216,12 @@
         $(settings.tipContainer).append($tip_content);
       },
 
-      show : function (init) {
+      show : function (init, isBackwards /*@Thomas: FORKED*/) {
         var opts = {}, ii, opts_arr = [], opts_len = 0,
             $timer = null;
 
         // are we paused?
-        if (settings.$li === undefined || ($.inArray(settings.$li.index(), settings.pauseAfter) === -1)) {
+        if (settings.$li === undefined || ($.inArray(settings.$li.index(), settings.pauseAfter) === -1) || isBackwards) {
 
           // don't go to the next li if the tour was paused
           if (settings.paused) {
@@ -319,16 +338,23 @@
       },
 
       hide : function () {
-        settings.postStepCallback(settings.$li.index(), settings.$current_tip);
+        settings.postStepCallback(settings.$li.index(), settings.$current_tip, 'hide' /*@Thomas:FORKED*/);
         $('.joyride-modal-bg').hide();
         settings.$current_tip.hide();
       },
 
-      set_li : function (init) {
+      set_li : function (init, isBackwards /*@Thomas: FORKED*/, isResumeBackwards /*@Thomas:FORKED*/) {
         if (init) {
           settings.$li = settings.$tip_content.eq(settings.startOffset);
           methods.set_next_tip();
           settings.$current_tip = settings.$next_tip;
+        } else if(isBackwards) { /*@Thomas:FORKED*/
+          if(!isResumeBackwards) {
+              settings.$li = settings.$li.prev();
+          } else {
+              settings.$li = settings.$li.prev().next();
+          }       
+          methods.set_next_tip();
         } else {
           settings.$li = settings.$li.next();
           methods.set_next_tip();
@@ -615,8 +641,8 @@
 
         $('.joyride-modal-bg').hide();
         settings.$current_tip.hide();
-        settings.postStepCallback(settings.$li.index(), settings.$current_tip);
-        settings.postRideCallback(settings.$li.index(), settings.$current_tip);
+        settings.postStepCallback(settings.$li.index(), settings.$current_tip, 'end' /*@Thomas:FORKED*/);
+        settings.postRideCallback(settings.$li.index(), settings.$current_tip, 'end'/*@Thomas:FORKED*/);
       },
 
       jquery_check : function () {
